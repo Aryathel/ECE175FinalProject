@@ -22,6 +22,26 @@ void main(void) {
 
   shuffle_deck(head);
 
+  i = 1;
+  temp = head;
+
+  while (temp->next != NULL) {
+    temp = temp->next;
+    i++;
+  }
+  if (i <= 20) {
+    while (head->next != NULL) {
+      temp = head;
+      head = head->next;
+      free(temp);
+    }
+    free(head);
+
+    head = create_deck();
+    tail = get_tail(head);
+    shuffle_deck(head);
+  }
+
   for (i = 0; i < 5; i++) {
     player = deal_card(head, player);
     temp = head;
@@ -52,8 +72,6 @@ void main(void) {
         disc[i-1] = 1;
         printf("Card %d Will Be Kept\n", i);
       }
-    } else if (i != -1) {
-      printf("Please select a number 1-5.\n");
     }
   }
   printf("\n");
