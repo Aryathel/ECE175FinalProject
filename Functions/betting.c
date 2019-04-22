@@ -21,9 +21,6 @@ int place_bet(int *coins){
     if (bet >= 1 && bet <= *coins){
       break;
     }
-    else {
-      printf("This is not a valid bet\n");
-    }
   }
 
   printf("\nYou bet %d coins, and you have %d coins left.\n\n", bet, *coins - bet);

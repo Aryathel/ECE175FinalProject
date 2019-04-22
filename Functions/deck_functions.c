@@ -33,18 +33,6 @@ card *create_deck() {
   return head;
 }
 
-card *get_tail(card *head) {
-  card *temp, *tail = NULL;
-  temp = head;
-
-  while(temp->next != NULL) {
-    temp = temp->next;
-  }
-  tail = temp;
-
-  return tail;
-}
-
 void shuffle_deck(card *head) {
   int i, j, card1, card2;
   card *temp1, *temp2;
@@ -248,12 +236,12 @@ void print_computer_hidden(card *pt) {
 
 }
 
-card *deal_card(card *head, card *hand) {
-  card *temp1, *temp2;
+card *deal_card(card **head, card *hand) {
+  card *temp1, *temp2, *temp3;
 
   temp1 = (card*) malloc(sizeof(card));
-  temp1->number = head->number;
-  temp1->suit = head->suit;
+  temp1->number = (*head)->number;
+  temp1->suit = (*head)->suit;
 
   if (hand == NULL) {
     temp1->next = NULL;
@@ -268,13 +256,35 @@ card *deal_card(card *head, card *hand) {
     temp2 = temp1;
     temp2->next = NULL;
   }
+
+  temp3 = (*head);
+  (*head) = (*head)->next;
+  free(temp3);
+
   return hand;
 }
 
-card *discard_and_draw(card *player, card *head, int disc[]){
+void re_deal(card *head, card *hand) {
+  hand->number = head->number;
+  hand->suit = head->suit;
+}
+
+void discard_cards(card **head) {
+  card *temp;
+
+  while ((*head) != NULL) {
+    temp = (*head);
+    (*head) = (*head)->next;
+    free(temp);
+  }
+
+  (*head) = NULL;
+}
+
+card *discard_and_draw(card *player, card **head, int disc[]){
   int i, j;
 
-  card *temp, *temp2;
+  card *temp;
 
   for (i = 0; i < 5; i++) {
     temp = player;
@@ -283,12 +293,12 @@ card *discard_and_draw(card *player, card *head, int disc[]){
         temp = temp->next;
       }
 
-      temp->number = head->number;
-      temp->suit = head->suit;
+      temp->number = (*head)->number;
+      temp->suit = (*head)->suit;
 
-      temp2 = head;
-      head = head->next;
-      free(temp2);
+      temp = (*head);
+      (*head) = (*head)->next;
+      free(temp);
     }
   }
 

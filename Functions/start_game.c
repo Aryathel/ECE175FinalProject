@@ -8,11 +8,17 @@ void print_multi(int x, int len) {
   }
 }
 
-void start_game(char player_name[]) {
+void start_game(char player_name[], int game) {
   int len, half_len;
 
   printf("Enter your name: ");
-  fgets(player_name, 40, stdin);
+  if (game == 0) {
+    fgets(player_name, 40, stdin);
+  } else {
+    fgets(player_name, 40, stdin);
+    fgets(player_name, 40, stdin);
+  }
+
   player_name[strlen(player_name) - 1] = '\0';
 
   len = strlen(player_name);
