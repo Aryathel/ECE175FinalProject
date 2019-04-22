@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include "types.h"
 
-int check_score(card *pt) {
-  int score = 0, i, j, jack_count, queen_count, king_count, ace_count, pair_count, three_count, straight_count, four_count, royal_count, temp_num, temp_suit;
-  int numbers[5], suits[5];
+void sort_cards(int numbers[], int suits[], card *pt) {
+  int temp_num, temp_suit, i, j;
 
-  //Read cards into two arrays, for numbers and suits.
   for (i = 0; i < 5; i++) {
     numbers[i] = pt->number;
     suits[i] = pt->suit;
@@ -26,6 +24,14 @@ int check_score(card *pt) {
       }
     }
   }
+}
+
+int check_score(card *pt) {
+  int score = 0, i, j, jack_count, queen_count, king_count, ace_count, pair_count, three_count, straight_count, four_count, royal_count;
+  int numbers[5], suits[5];
+
+  //Read cards into two arrays, for numbers and suits, and sort by face value (least to greatest).
+  sort_cards(numbers, suits, pt);
 
   //Check for Jacks or Better Case.
   jack_count = 0;
