@@ -6,13 +6,14 @@
 #include "./Functions/start_game.c"
 #include "./Functions/check_winners.c"
 #include "./Functions/betting.c"
+#include "./Functions/computer_functions.c"
 
 void main(void) {
   //Seed random number functions
   srand(time(0));
 
   card *head = NULL, *tail = NULL, *player = NULL, *computer = NULL, *temp_computer, *temp_player, *temp;
-  int i, j, disc[5], coins, current_bet, win_lose = 0, score, game = 0, round=0;
+  int i, j, disc[5], coins, current_bet, win_lose = 0, score, game = 0, round=0, computer_score;
   char user_name[40];
   char cont = 'y';
 
@@ -81,7 +82,7 @@ void main(void) {
       //Makes user place their bet for the round.
       current_bet = place_bet(&coins);
 
-      //User selecting which cards to keep.
+      //User selecting which cards to keep. (0 - DELETE CARD, 1 - KEEP CARD)
       while (i != -1){
         printf("Pick cards (between 1-5) to hold. Enter the same number to deselect a card (-1 to stop): ");
         scanf("%d", &i);
@@ -99,6 +100,20 @@ void main(void) {
 
       //Swap out cards that were not selected to be held.
       player = discard_and_draw(player, &head, disc);
+
+      //Reset card swap choices for computer move.
+      for (i = 0; i < 5; i++) {
+        disc[i] = 1;
+      }
+
+      //Get the value of the computer's hand.
+      computer_score = get_score(computer);
+
+      //Set up computer move.
+      computer_move(disc, computer_score, computer)
+
+      //Make computer move.
+      computer = discard_and_draw(computer, &head, disc)
 
       //Get value of who won the round. (1 = Player wins, 2 = Computer Wins)
       win_lose = check_round_winner(player, computer, user_name);
