@@ -119,7 +119,7 @@ void print_cards(card *pt) {
   printf("\n");
 
   //Print whitespace with vertical card edges.
-  printf("%c / \\ %c %c / \\ %c %c / \\ %c %c / \\ %c %c / \\ %c\n", 186, 186, 186, 186, 186, 186, 186, 186, 186, 186);
+  printf("%c     %c %c     %c %c     %c %c     %c %c     %c\n", 186, 186, 186, 186, 186, 186, 186, 186, 186, 186);
 
   //Print card suits with vertical card edges.
   for (i = 0; i < 5; i++) {
@@ -128,7 +128,7 @@ void print_cards(card *pt) {
   printf("\n");
 
   //Print more whitespace with vertical card edges.
-  printf("%c \\ / %c %c \\ / %c %c \\ / %c %c \\ / %c %c \\ / %c\n", 186, 186, 186, 186, 186, 186, 186, 186, 186, 186);
+  printf("%c     %c %c     %c %c     %c %c     %c %c     %c\n", 186, 186, 186, 186, 186, 186, 186, 186, 186, 186);
 
   //Print final face value numbers along with, you guess it, more vertical card edges.
   for (i = 0; i < 5; i++) {

@@ -54,17 +54,15 @@ void main(void) {
         temp = temp->next;
         i++;
       }
-      //printf("\n------\nNum Cards Left: %d\n", i);
 
       //Re-create deck if there are not enough cards.
       if (i <= 20) {
-        //printf("Redealing...\n");
+        printf("Redealing...\n");
         discard_cards(&head);
 
         head = create_deck();
         shuffle_deck(head);
       }
-      //printf("------\n");
 
       //Deal cards in an alternating fashion to both players.
       for (i = 0; i < 5; i++) {

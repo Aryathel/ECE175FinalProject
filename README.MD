@@ -45,9 +45,9 @@ _**Note:**_ *These instructions are in order to enable your command line interfa
 # TO-DO LIST
 
 - [x] Add Graphics to game
-- [x] Make the computer actuall play the game
+- [x] Make the computer actually play the game
 - [ ] Add a two-player mode
-- [ ] Add game statisctics that record over time
+- [ ] Add game statistics that record over time
 - [ ] Add an in-depth tie-breaking system.
 
 # PARTICIPANTS

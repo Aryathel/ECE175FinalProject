@@ -1,6 +1,6 @@
 //Function to make the computer keep or discard cards based on what it has in its hand currently.
 void computer_move(int disc[], card *pt) {
-  int jack_count, queen_count, king_count, ace_count, max_count, i, j, score;
+  int jack_count=0, queen_count=0, king_count=0, ace_count=0, max_count, i, j, score;
   card *temp, *temp2;
 
   //Get the value of the computer's hand.
