@@ -51,5 +51,5 @@ _**Note:**_ *These instructions are in order to enable your command line interfa
 - [ ] Add an in-depth tie-breaking system.
 
 # PARTICIPANTS
-- @github/Heroicos_HM
-- @github/CamAlpha
+- [Heroicos_HM](https://github.com/HeroicosHM)
+- [Alpha](https://github.com/CamAlpha)
