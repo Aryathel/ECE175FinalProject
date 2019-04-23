@@ -2,27 +2,37 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Function to print multiple characters at once given the character and the number of them to print.
 void print_multi(int x, int len) {
   for(int i = 0; i < len; i++) {
     printf("%c", x);
   }
 }
 
+//Function called to start game, given the array to store the username in and the value of what game in the loop is being played.
 void start_game(char player_name[], int game) {
   int len, half_len;
 
+  //Gets player name.
   printf("Enter your name: ");
+  //If this is the first game:
   if (game == 0) {
     fgets(player_name, 40, stdin);
+  //If its not the first game: (this is necessary because otherwise the program failes to read in the username for consecutive games)
   } else {
     fgets(player_name, 40, stdin);
     fgets(player_name, 40, stdin);
   }
 
+  //Make sure the username is properly going to be read as a string.
   player_name[strlen(player_name) - 1] = '\0';
 
+  //Langth of the username (for graphics purposes.)
   len = strlen(player_name);
 
+  //Printing out the start of the game. Its mostly hardcoded, but it does adapt its own width based on the size of the user_name
+  //entered by the player. Its not really worth commenting all of it. It uses the print_multi function in order to
+  //adapt the width (passing the necessary character and the width to be added.)
   printf("%c", 201);
   print_multi(205, len + 40);
   printf("%c\n%c      %s, Let's Play Jacks or Better      %c\n%c", 187, 186, player_name, 186, 204);

@@ -1,4 +1,0 @@
-C:\Users\hough\OneDrive\Desktop\Code_Stuffs\C\ECE175FinalProject\Functions\computer_functions.c:1:43: error: unknown type name 'card'; did you mean 'char'?
- void computer_move(int disc[], int score, card *pt) {
-                                           ^~~~
-                                           char
