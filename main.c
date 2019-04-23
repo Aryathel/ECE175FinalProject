@@ -125,6 +125,7 @@ void main(void) {
       discard_cards(&player);
       discard_cards(&computer);
     }
+    //Print the end of game message, and ask player to play again.
     printf("You LOST all your coins. Game Over!\n\nDo you want to start a new game? (q to Quit): ");
     scanf(" %c", &cont);
   }
