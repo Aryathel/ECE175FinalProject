@@ -32,7 +32,7 @@ The results are shown below. If you want to try out the game for yourself, look 
 
 # INSTRUCTIONS TO PLAY THIS YOURSELF
 
-Note: These instructions are in order to enable your command line interface to properly display the ASCII characters used for things like the suits of the cards and the borders of the cards.
+_**Note:**_ *These instructions are in order to enable your command line interface to properly display the ASCII characters used for things like the suits of the cards and the borders of the cards.*
 
 1. Download the [main.exe](https://github.com/HeroicosHM/ECE175FinalProject/raw/master/main.exe) file on a windows device.
 2. Double click this file.
@@ -49,3 +49,7 @@ Note: These instructions are in order to enable your command line interface to p
 - [ ] Add a two-player mode
 - [ ] Add game statisctics that record over time
 - [ ] Add an in-depth tie-breaking system.
+
+# PARTICIPANTS
+- @github/Heroicos_HM
+- @github/CamAlpha
