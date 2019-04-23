@@ -13,7 +13,7 @@ void main(void) {
   srand(time(0));
 
   card *head = NULL, *tail = NULL, *player = NULL, *computer = NULL, *temp_computer, *temp_player, *temp;
-  int i, j, disc[5], coins, current_bet, win_lose = 0, score, game = 0, round=0, computer_score;
+  int i, j, disc[5], coins, current_bet, win_lose = 0, score, game = 0, round=0;
   char user_name[40];
   char cont = 'y';
 
@@ -43,7 +43,7 @@ void main(void) {
     while (coins > 0) {
       //Reset for newest round of play.
       for (i = 0; i < 5; i++) {
-        disc[i] = 1;
+        disc[i] = 0;
       }
       round++;
 
@@ -101,19 +101,11 @@ void main(void) {
       //Swap out cards that were not selected to be held.
       player = discard_and_draw(player, &head, disc);
 
-      //Reset card swap choices for computer move.
-      for (i = 0; i < 5; i++) {
-        disc[i] = 1;
-      }
-
-      //Get the value of the computer's hand.
-      computer_score = get_score(computer);
-
       //Set up computer move.
-      computer_move(disc, computer_score, computer)
+      computer_move(disc, computer);
 
       //Make computer move.
-      computer = discard_and_draw(computer, &head, disc)
+      computer = discard_and_draw(computer, &head, disc);
 
       //Get value of who won the round. (1 = Player wins, 2 = Computer Wins)
       win_lose = check_round_winner(player, computer, user_name);

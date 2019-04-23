@@ -33,6 +33,7 @@ card *create_deck() {
   return head;
 }
 
+//Function to shuffle a deck of 52 cards given head.
 void shuffle_deck(card *head) {
   int i, j, card1, card2;
   card *temp1, *temp2;
@@ -76,6 +77,7 @@ void shuffle_deck(card *head) {
   }
 }
 
+//Prints cards with ASCII art in a horizontal fashion given the head of a hand.
 void print_cards(card *pt) {
   int i;
   int numbers[5], suits[5];
@@ -86,7 +88,10 @@ void print_cards(card *pt) {
     pt = pt->next;
   }
 
+  //Print tops of the cards.
   printf("%c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c\n", 201, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 187);
+
+  //Print the second row of each card (the top left face value) and vertical card edges.
   for (i = 0; i < 5; i++) {
     printf("%c", 186);
     switch (numbers[i]) {
@@ -113,15 +118,19 @@ void print_cards(card *pt) {
   }
   printf("\n");
 
-  printf("%c     %c %c     %c %c     %c %c     %c %c     %c\n", 186, 186, 186, 186, 186, 186, 186, 186, 186, 186);
+  //Print whitespace with vertical card edges.
+  printf("%c / \\ %c %c / \\ %c %c / \\ %c %c / \\ %c %c / \\ %c\n", 186, 186, 186, 186, 186, 186, 186, 186, 186, 186);
 
+  //Print card suits with vertical card edges.
   for (i = 0; i < 5; i++) {
     printf("%c  %c  %c ", 186, suits[i], 186);
   }
   printf("\n");
 
-  printf("%c     %c %c     %c %c     %c %c     %c %c     %c\n", 186, 186, 186, 186, 186, 186, 186, 186, 186, 186);
+  //Print more whitespace with vertical card edges.
+  printf("%c \\ / %c %c \\ / %c %c \\ / %c %c \\ / %c %c \\ / %c\n", 186, 186, 186, 186, 186, 186, 186, 186, 186, 186);
 
+  //Print final face value numbers along with, you guess it, more vertical card edges.
   for (i = 0; i < 5; i++) {
     printf("%c   ", 186);
     if (numbers[i] != 10) {
@@ -148,9 +157,11 @@ void print_cards(card *pt) {
   }
   printf("\n");
 
+  //Print bottom card edges.
   printf("%c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c\n\n", 200, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 188);
 }
 
+//Nearly identical to he print function directly above, but leaves the last two cards in a hand blank.
 void print_computer_hidden(card *pt) {
   int i;
   int numbers[3], suits[3];
@@ -191,6 +202,7 @@ void print_computer_hidden(card *pt) {
   }
   printf("\n");
 
+  //All whitespace for last two cards become  filled in, and facevalues and suits are also overwritten by the in-fill.
   printf("%c     %c %c     %c %c     %c %c%c%c%c%c%c%c %c%c%c%c%c%c%c\n", 186, 186, 186, 186, 186, 186, 186, 177, 177, 177, 177, 177, 186, 186, 177, 177, 177, 177, 177, 186);
 
   for (i = 0; i < 3; i++) {
@@ -233,30 +245,38 @@ void print_computer_hidden(card *pt) {
   printf("\n");
 
   printf("%c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c\n\n", 200, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 188, 200, 205, 205, 205, 205, 205, 188);
-
 }
 
+//Deal a card to a hand given the top of the deck and the head of the hand.
 card *deal_card(card **head, card *hand) {
   card *temp1, *temp2, *temp3;
 
+  //Allocate room for the card
   temp1 = (card*) malloc(sizeof(card));
+
+  //Set value of new card from top of deck.
   temp1->number = (*head)->number;
   temp1->suit = (*head)->suit;
 
+  //If there are not cards in hand:
   if (hand == NULL) {
     temp1->next = NULL;
     hand = temp1;
+  //If there are cards in hand
   } else {
     temp2 = hand;
+    //Find next empty card location.
     while(temp2->next != NULL) {
       temp2 = temp2->next;
     }
+    //Fill in that card with the card created above.
     temp2->next = temp1;
     temp2 = temp2->next;
     temp2 = temp1;
     temp2->next = NULL;
   }
 
+  //Discard that card from the top of the deck.
   temp3 = (*head);
   (*head) = (*head)->next;
   free(temp3);
@@ -264,43 +284,49 @@ card *deal_card(card **head, card *hand) {
   return hand;
 }
 
-void re_deal(card *head, card *hand) {
-  hand->number = head->number;
-  hand->suit = head->suit;
-}
-
+//Discards a set of card and frees its memory given any head location (is used for both hands and discarding remainder of deck).
 void discard_cards(card **head) {
   card *temp;
 
+  //Frees cards until none are left to free.
   while ((*head) != NULL) {
     temp = (*head);
     (*head) = (*head)->next;
     free(temp);
   }
 
+  //esets the head to null.
   (*head) = NULL;
 }
 
+//Function to discard a card and draw a new one from a hand based on either computer or player selections.
 card *discard_and_draw(card *player, card **head, int disc[]){
   int i, j;
 
   card *temp;
 
+
   for (i = 0; i < 5; i++) {
     temp = player;
+    //If card is marked for swapping:
     if (disc[i] == 0) {
+      //Get to card location.
       for (j = 0; j < i; j++) {
         temp = temp->next;
       }
 
+      //Swap taht value with values form the top of the deck.
       temp->number = (*head)->number;
       temp->suit = (*head)->suit;
 
+      //Discard the card from the top of the deck.
       temp = (*head);
       (*head) = (*head)->next;
       free(temp);
     }
+    //Otherwise don't do anything.
   }
 
+  //Return pointer to the hand.
   return player;
 }

@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include "types.h"
 
-int check_score(card *pt) {
-  int score = 0, i, j, jack_count, queen_count, king_count, ace_count, pair_count, three_count, straight_count, four_count, royal_count, temp_num, temp_suit;
-  int numbers[5], suits[5];
+//Function to sort a hand of cards into two arrays (one for face value, one for suit) and then sort those arrays from
+//Least to greatest.
+void sort_cards(int numbers[], int suits[], card *pt) {
+  int temp_num, temp_suit, i, j;
 
-  //Read cards into two arrays, for numbers and suits.
+  //Read hand into arrays.
   for (i = 0; i < 5; i++) {
     numbers[i] = pt->number;
     suits[i] = pt->suit;
     pt = pt->next;
   }
 
+  //Sort the arrays based on face value (making sure that numbers[i] will have its suit correspondingly stored in suits[i])
   for (i = 0; i < 4; i++) {
     for (j = i+1; j < 5; j++) {
       if (numbers[i] > numbers[j]) {
@@ -26,6 +28,17 @@ int check_score(card *pt) {
       }
     }
   }
+}
+
+//Function to get the value of the hand from the head pointer of the hand.  This function works by assigning an integer
+//value to eaach hand, a "score". If the hand does not match any winning cases, it is scored at 0. Jacks or Better is 1,
+//Two Pair is 2, and so on until Royal Flush is 9. Then the score is returned.
+int check_score(card *pt) {
+  int score = 0, i, j, jack_count, queen_count, king_count, ace_count, pair_count, three_count, straight_count, four_count, royal_count;
+  int numbers[5], suits[5];
+
+  //Read cards into two arrays, for numbers and suits, and sort by face value (least to greatest).
+  sort_cards(numbers, suits, pt);
 
   //Check for Jacks or Better Case.
   jack_count = 0;
@@ -132,6 +145,7 @@ int check_score(card *pt) {
   return score;
 }
 
+//Prints the string that shows the players what each hand has, based on given score.
 void print_hand_type(int score) {
   switch (score) {
     case 1:
@@ -166,21 +180,26 @@ void print_hand_type(int score) {
   }
 }
 
+//Implements the above functions to check the score of the round given the head points for the player and the computer,
+//as well as the username (for the sake of printing cleanly).
 int check_round_winner(card *player, card *computer, char user_name[]) {
   int player_score, computer_score;
 
+  //Print Computer hand's cards after swaps (in full, not hidden), and what hand type it had.
   printf("Computer's Hand: (");
   computer_score = check_score(computer);
   print_hand_type(computer_score);
   printf(")\n");
   print_cards(computer);
 
+  //Print player's hand after card swaps, as well as the hand type.
   printf("%s's Hand: (", user_name);
   player_score = check_score(player);
   print_hand_type(player_score);
   printf(")\n");
   print_cards(player);
 
+  //Returns 0 if the computer wins, or 1 if the player wins.
   if (computer_score > player_score) {
     return 0;
   } else {
