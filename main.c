@@ -7,6 +7,7 @@
 #include "./Functions/check_winners.c"
 #include "./Functions/betting.c"
 #include "./Functions/computer_functions.c"
+#include "./Functions/misc_functions.c"
 
 void main(void) {
   //Seed random number functions
@@ -116,7 +117,8 @@ void main(void) {
       discard_cards(&computer);
     }
     //Print the end of game message, and ask player to play again.
-    printf("You LOST all your coins. Game Over!\n\nDo you want to start a new game? (q to Quit): ");
+    print_game_over();
+    printf("\nDo you want to start a new game? (q to Quit): ");
     scanf(" %c", &cont);
   }
 
