@@ -46,8 +46,8 @@ _**Note:**_ *These instructions are in order to enable your command line interfa
 
 - [x] Add Graphics to game
 - [x] Make the computer actually play the game
-- [ ] Add a two-player mode
-- [ ] Add game statistics that record over time
+- [ ] ~~Add a two-player mode~~
+- [x] Add game statistics that record over time
 - [x] Add an in-depth tie-breaking system.
 
 # PARTICIPANTS

@@ -11,6 +11,7 @@
 #include "./Functions/statistics.c"
 
 void main(void) {
+  //In order to view all ASCII art and printed statistics neatly, the program asks the user to expand their console window
   printf("Please make sure you can see the entire line below on a single line before continuing:\n%c", 204);
   print_multi(205, 103);
   printf("%c\nPress Enter to Continue...", 185);
@@ -20,28 +21,36 @@ void main(void) {
   srand(time(0));
 
   //Per run variables.
-  card *head = NULL, *tail = NULL, *player = NULL, *computer = NULL, *temp_computer, *temp_player, *temp;
-  int i, j, disc[5], coins, current_bet, win_lose = 0, game = 0, round = 0;
-  char cont = 'y', user_name[20];
+  card *head = NULL, *tail = NULL, *player = NULL, *player2 = NULL, *computer = NULL, *temp_computer, *temp_player, *temp;
+  int i, j, disc[5], coins, coins2, current_bet, win_lose = 0, round = 0, game = 0;
+  char cont = 'y', user_name[20], user_name2[20];
 
   //Stats variables.
-  int games_played = 0, comp_wins = 0, player_wins = 0, rounds_total = 0, other = 0, jacks_or_better = 0, two_pair = 0, three_of_a_kind = 0, straight = 0, flush = 0, full_house = 0, four_of_a_kind = 0, straight_flush = 0, royal_flush = 0;
+  int num_players, games_played = 0, comp_wins = 0, player_wins = 0, rounds_total = 0, other = 0, jacks_or_better = 0, two_pair = 0, three_of_a_kind = 0, straight = 0, flush = 0, full_house = 0, four_of_a_kind = 0, straight_flush = 0, royal_flush = 0;
 
+  //Try to open the stats text file.
   FILE *stats = fopen("./Data/stats.txt", "r");
   if (stats == NULL) {
+    //Try to create the file if it doesn't exist
     stats = fopen("./Data/stats.txt", "w");
     fclose(stats);
+    //Try to open it again.
     stats = fopen("./Data/stats.txt", "r");
     while (stats == NULL) {
+      //This loop will run while the file still does not exist, most likely because the proper folder does not exist.
+      //Note - this is changed in the d2l submission version, the proper version is on Github - https://github.com/HeroicosHM/ECE175FinalProject.
       printf("Stats file inaccessible.\nPlease create a folder called Data within the program folder.\n");
       printf("Press Enter to Continue");
       while(getchar() != '\n');
+      //Try to create the file again.
       stats = fopen("./Data/stats.txt", "w");
     }
+    //Since the file had to be created, initialize all the values to 0 in the file.
     fprintf(stats, "%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n%d\n", games_played, rounds_total, comp_wins, player_wins, other, jacks_or_better, two_pair, three_of_a_kind, straight, flush, full_house, four_of_a_kind, straight_flush, royal_flush);
     fclose(stats);
     cont = 'y';
   } else {
+    //if the file does exist, overwrite the stats variables with values from the file.
     fscanf(stats, "%d%d%d%d%d%d%d%d%d%d%d%d%d%d", &games_played, &rounds_total, &comp_wins, &player_wins, &other, &jacks_or_better, &two_pair, &three_of_a_kind, &straight, &flush, &full_house, &four_of_a_kind, &straight_flush, &royal_flush);
     fclose(stats);
   }
@@ -50,13 +59,12 @@ void main(void) {
   while (cont != 'Q' && cont != 'q') {
     games_played += 1;
 
-    //Every game starts at 100 coins.
-    coins = 100;
-
-    //Keeps track of game number (getting user name input breaks otherwise).
     if (round > 0) {
       game = 1;
     }
+
+    //Every game starts at 100 coins.
+    coins = 100;
 
     //Reset game round counter.
     round = 0;
@@ -154,7 +162,9 @@ void main(void) {
       discard_cards(&player);
       discard_cards(&computer);
     }
+
     //Update the game's stats files.
+    //Originally we wanted to create a leaderboard for the longest number of rounds a person lasted, but were unable to complete in time.
     save_stats(games_played, rounds_total, comp_wins, player_wins, other, jacks_or_better, two_pair, three_of_a_kind, straight, flush, full_house, four_of_a_kind, straight_flush, royal_flush);
 
     //Print the end of game message and statistics, and ask player to play again.
@@ -162,6 +172,7 @@ void main(void) {
     print_statistics(games_played, rounds_total, comp_wins, player_wins, other, jacks_or_better, two_pair, three_of_a_kind, straight, flush, full_house, four_of_a_kind, straight_flush, royal_flush);
     printf("\nDo you want to start a new game? (q to Quit): ");
     scanf(" %c", &cont);
-  }
+}
+  //"See you next time!". Clearly.
   printf("See you next time!");
 }

@@ -4,16 +4,18 @@
 
 //Function called to start game, given the array to store the username in and the value of what game in the loop is being played.
 void start_game(char player_name[], int game) {
-  int len, half_len;
+  int len,  half_len;
 
   //Gets player name.
   printf("\nEnter your name: ");
-  //If this is the first game:
-  if (game == 0) {
+
+  //Doesnt read prooperly the second time around without this.
+  if (game > 0) {
+    //Get Player Username:
     fgets(player_name, 20, stdin);
-  //If its not the first game: (this is necessary because otherwise the program failes to read in the username for consecutive games)
+    fgets(player_name, 20, stdin);
   } else {
-    fgets(player_name, 20, stdin);
+    //Get Player Username:
     fgets(player_name, 20, stdin);
   }
 
