@@ -48,7 +48,7 @@ _**Note:**_ *These instructions are in order to enable your command line interfa
 - [x] Make the computer actually play the game
 - [ ] Add a two-player mode
 - [ ] Add game statistics that record over time
-- [ ] Add an in-depth tie-breaking system.
+- [x] Add an in-depth tie-breaking system.
 
 # PARTICIPANTS
 - [Heroicos_HM](https://github.com/HeroicosHM)

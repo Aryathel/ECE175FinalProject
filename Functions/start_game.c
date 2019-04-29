@@ -2,26 +2,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-//Function to print multiple characters at once given the character and the number of them to print.
-void print_multi(int x, int len) {
-  for(int i = 0; i < len; i++) {
-    printf("%c", x);
-  }
-}
-
 //Function called to start game, given the array to store the username in and the value of what game in the loop is being played.
 void start_game(char player_name[], int game) {
   int len, half_len;
 
   //Gets player name.
-  printf("Enter your name: ");
+  printf("\nEnter your name: ");
   //If this is the first game:
   if (game == 0) {
-    fgets(player_name, 40, stdin);
+    fgets(player_name, 20, stdin);
   //If its not the first game: (this is necessary because otherwise the program failes to read in the username for consecutive games)
   } else {
-    fgets(player_name, 40, stdin);
-    fgets(player_name, 40, stdin);
+    fgets(player_name, 20, stdin);
+    fgets(player_name, 20, stdin);
   }
 
   //Make sure the username is properly going to be read as a string.
