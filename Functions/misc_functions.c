@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-//Basic function to print out "Game Over" in ASCII art.
-=======
 //Need I Say Anything?
->>>>>>> 266d0fadd7f9452f151bf39b4b357058f85157c4
 void print_game_over(void) {
   printf("\n      ___           ___           ___           ___\n");
   printf("     /\\__\\         /\\  \\         /\\  \\         /\\__\\\n");
