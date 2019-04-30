@@ -1,3 +1,4 @@
+//Basic function to print out "Game Over" in ASCII art.
 void print_game_over(void) {
   printf("\n      ___           ___           ___           ___                ___                         ___           ___     \n");
   printf("     /\\__\\         /\\  \\         /\\  \\         /\\__\\              /\\  \\          ___          /\\__\\         /\\  \\    \n");
