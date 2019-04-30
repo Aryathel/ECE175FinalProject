@@ -199,6 +199,7 @@ void update_winning_hands(card *player, card *computer, int *other, int *royal_f
   switch (win_score) {
     case 0:
       *other += 1;
+      break;
     case 1:
       *jacks_or_better += 1;
       break;
