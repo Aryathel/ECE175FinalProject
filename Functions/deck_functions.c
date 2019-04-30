@@ -171,7 +171,7 @@ void print_computer_hidden(card *pt) {
     suits[i] = pt->suit;
     pt = pt->next;
   }
-
+  
   printf("%c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c %c%c%c%c%c%c%c\n", 201, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 187, 201, 205, 205, 205, 205, 205, 187);
   for (i = 0; i < 3; i++) {
     printf("%c", 186);
